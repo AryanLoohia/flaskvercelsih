@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIH</title>
+    <link rel="stylesheet" href="../static/style.css"/>
+</head>
+<body>
+    <div class="main">
+        <div class="loading" id="loadingSpinner" style="display: none;">
+            Loading...
+        </div>
+
+        <div class="header">
+            <h1> SIH- BinaryByte </h1>
+        </div>
+
+        <div class="form-container">
+            <form class="form" method="POST" action="{{ url_for('predict') }}" >
+               
+
+              <div class="form-group">
+                <label for="hexa">Input Hexadecimal Data</label>
+                <input type="text" id="hexa" name="hexa" required="">
+              </div>
+              <button class="form-submit-btn" type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="result">
+            {% if prediction_text %}
+                <h2>{{ prediction_text }}</h2>
+            {% endif %}
+        </div>
+    </div>
+
+   
+    <script>
+      
+            function showLoadingAndAnimateButton(event) {
+                event.preventDefault(); 
+                document.getElementById('loadingSpinner').style.display = 'block'; 
+        
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.classList.add('animate-pop'); 
+        
+                
+                setTimeout(function() {
+                    event.target.submit(); 
+                }, 300); 
+            }
+
+
+            function validateHex() {
+                const input = document.getElementById("hexa").value;
+                const hexPattern = /^[0-9A-Fa-f]+$/; 
+        
+                if (!hexPattern.test(input)) {
+                    alert("Please enter a valid hexadecimal number.");
+                    return false; 
+                }
+                return true; 
+            }
+        
+
+    </script>
+</body>
+</html>
+
+
+
+
+
